@@ -10,7 +10,7 @@ Migrar da experiência em suporte técnico e redes para uma posição de entrada
 
 ## Tecnologias e ferramentas
 
-`TCP/IP` `DNS` `Wireshark` `Linux` `Windows` `Sysmon` `Wazuh (SIEM)` `Splunk` `MITRE ATT&CK` `Python` `SQL` `Git/GitHub`
+`TCP/IP` `DNS` `Wireshark` `Linux` `Windows` `Sysmon` `Wazuh (SIEM)` `MITRE ATT&CK` `Python` `SQL` `Git/GitHub`
 
 ## Estrutura deste repositório
 
@@ -31,5 +31,8 @@ Cada pasta de projeto tem seu próprio README com o passo a passo do ambiente ut
 Este portfólio é atualizado conforme avanço nos estudos — cada projeto reflete o que aprendi na prática, não só em teoria.
 
 ---
+## Aviso
+
+As notas em notes/ são resumos pessoais de estudo, elaborados a partir de cursos da Cisco Networking Academy (Introduction to Cybersecurity e Ethical Hacker).
 
 📫 [LinkedIn](https://linkedin.com/in/rosana-budant) · [GitHub](https://github.com/RosanaBudant)
