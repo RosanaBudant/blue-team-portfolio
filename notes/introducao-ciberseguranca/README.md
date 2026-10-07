@@ -1,20 +1,27 @@
-# Introdução à Segurança Cibernética
+# Sensibilização para a Segurança Digital
 
-Notas de estudo a partir do curso Cisco Networking Academy /
-Introduction to Cybersecurity (material Cisco + PUCRS), selecionando os
-tópicos com aplicação mais direta em Blue Team. Os módulos do curso
-voltados a segurança pessoal do usuário final, aspectos legais/carreira
-não fazem parte deste recorte.
+Notas de estudo a partir do curso **Sensibilização para a Segurança
+Digital** (Cisco Networking Academy / PUCRS, Programa CiberEducação Cisco
+Brasil — em inglês, *Digital Safety and Security Awareness*).
+
+Este curso tem um recorte mais amplo de literacia digital (segurança
+infantil online, deepfakes/desinformação, políticas de privacidade, saúde
+digital, etc.). Deste material, foram selecionados apenas os tópicos com
+aplicação direta em Blue Team; o restante do conteúdo (voltado a
+usuário final/literacia digital geral) não entrou neste recorte.
 
 ## Índice
 
-1. [Fundamentos: CIA Triad e o Cubo de McCumber](./01-fundamentos-cia-triad.md)
-2. [Tipos de Invasores e Origem das Ameaças](./02-tipos-de-invasores.md)
-3. [Malware — Tipos e Sintomas](./03-malware.md)
-4. [Métodos de Ataque](./04-metodos-de-ataque.md)
-5. [Dispositivos de Segurança e Detecção](./05-dispositivos-e-deteccao.md)
-6. [Detecção Comportamental, SIEM, SOC e CSIRT](./06-siem-soc-csirt.md)
+1. [Como Identificar Ameaças (Sinais e Sintomas)](./02-como-identificar-ameacas.md)
+2. [Privacidade, Vigilância e Rastreamento Online](./07-privacidade-e-rastreamento.md)
+3. [Dark Web — O que Todo Analista Deveria Saber](./10-dark-web.md)
 
-Cada arquivo termina conectando o conceito teórico ao que será construído
-em [`blue-team-lab/`](../../blue-team-lab) (Wazuh) e
+> Os arquivos mantêm a numeração original do material completo do curso
+> (02, 07, 10), para referência caso o restante do conteúdo seja
+> incorporado futuramente.
+
+Os sinais de ameaça e os conceitos de rastreamento/dark web complementam
+diretamente o que já está em
+[`introducao-ciberseguranca/`](../introducao-ciberseguranca) e embasam o
+trabalho prático em [`blue-team-lab/`](../../blue-team-lab) e
 [`pcap-analysis/`](../../pcap-analysis).
