@@ -1,4 +1,4 @@
-# Blue Team Portfolio — Rosana Budant
+# Blue Team Portfolio — Rosana Schreiner Budant
 
 ## Quem sou
 
@@ -10,29 +10,38 @@ Migrar da experiência em suporte técnico e redes para uma posição de entrada
 
 ## Tecnologias e ferramentas
 
-`TCP/IP` `DNS` `Wireshark` `Linux` `Windows` `Sysmon` `Wazuh (SIEM)` `MITRE ATT&CK` `Python` `SQL` `Git/GitHub`
+`TCP/IP` `DNS` `Wireshark` `Linux` `Windows` `Windows Event Logs` `Wazuh (SIEM)` `MITRE ATT&CK` `Python` `SQL` `Git/GitHub`
 
 ## Estrutura deste repositório
 
-| Pasta | Conteúdo |
-|---|---|
-| [`notes/`](./notes) | Resumos de conceitos estudados em cursos e na faculdade (redes, fundamentos de SOC, MITRE ATT&CK, etc.) |
-| [`pcap-analysis/`](./pcap-analysis) | Análises de captura de tráfego (Wireshark) documentadas |
-| [`system-investigations/`](./system-investigations) | Investigações práticas em sistemas Linux e Windows (processos, logs, eventos) |
-| [`blue-team-lab/`](./blue-team-lab) | Projeto principal: laboratório de detecção com Windows, Linux, Sysmon e Wazuh |
-| [`incident-reports/`](./incident-reports) | Relatórios de incidentes simulados, com linha do tempo, evidências e mapeamento MITRE ATT&CK |
+| Pasta | Conteúdo | Status |
+|---|---|---|
+| [`notes/`](./notes) | Resumos de estudo: introdução à cibersegurança, fundamentos de redes, sensibilização para a segurança digital e hacking ético | Em andamento |
+| [`incident-reports/`](./incident-reports) | Relatórios de incidentes simulados no laboratório, com linha do tempo, evidências e mapeamento MITRE ATT&CK | 1 incidente publicado |
+| `blue-team-lab/` | Documentação do laboratório de detecção (arquitetura e configuração) | Em breve |
+| `pcap-analysis/` | Análises de captura de tráfego (Wireshark) | Em breve |
+| `system-investigations/` | Investigações em sistemas Linux e Windows (processos, logs, eventos) | Em breve |
+
+## Laboratório atual
+
+- **SIEM:** Wazuh 4.9 (instalação all-in-one) em uma VM Ubuntu
+- **Endpoint monitorado:** VM Windows 7 com agente Wazuh, enviando Windows Event Logs
+- **Rede:** VirtualBox com adaptador host-only entre as VMs, isolado de sistemas reais
+
+Os incidentes de `incident-reports/` são gerados de propósito nesse ambiente, detectados no Wazuh e investigados.
 
 ## Como reproduzir
 
-Cada pasta de projeto tem seu próprio README com o passo a passo do ambiente utilizado e como reproduzir a investigação.
+Cada pasta de projeto terá seu próprio README com o passo a passo do ambiente e como reproduzir a investigação.
 
 ## Aprendizados
 
-Este portfólio é atualizado conforme avanço nos estudos — cada projeto reflete o que aprendi na prática, não só em teoria.
+Este portfólio é atualizado conforme avanço nos estudos. Cada projeto reflete o que aprendi na prática, não só em teoria.
 
 ---
+
 ## Aviso
 
-As notas em notes/ são resumos pessoais de estudo, elaborados a partir de cursos da Cisco Networking Academy (Introduction to Cybersecurity e Ethical Hacker).
+As notas em `notes/` são resumos pessoais de estudo, elaborados a partir de cursos da Cisco Networking Academy (Introduction to Cybersecurity, Ethical Hacker e Sensibilização para a Segurança Digital) e da disciplina de Laboratório de Redes (PUCRS). Não reproduzem o material original.
 
 📫 [LinkedIn](https://linkedin.com/in/rosana-budant) · [GitHub](https://github.com/RosanaBudant)
