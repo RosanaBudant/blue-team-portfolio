@@ -15,12 +15,16 @@ tráfego e Blue Team.
 6. [TCP e UDP](./06-tcp-udp.md)
 7. [IPv4 — Protocolo e Endereçamento](./07-ipv4-enderecamento.md)
 8. [HTTP e HTTPS](./08-http.md)
+9. [Roteamento IP e Tabelas de Roteamento](./09-roteamento-ip.md)
+10. [CIDR e VLSM](./10-cidr-vlsm.md)
 
-Cada arquivo termina com uma seção **"Ângulo de segurança"**, conectando o
-conceito de redes ao que é observável/detectável numa análise de Blue Team
-(Wireshark, IDS, SIEM).
+Cada arquivo termina com uma seção **"Ângulo de segurança"** (ou
+"Conexão com Blue Team"), conectando o conceito de redes ao que é
+observável/detectável numa análise de Blue Team (Wireshark, IDS, SIEM).
 
 ## Próximos passos
 
 Os tópicos de DNS, DHCP e TCP/UDP aqui servem de base teórica direta para
-o projeto prático em [`pcap-analysis/`](../../pcap-analysis).
+o projeto prático em [`pcap-analysis/`](../../pcap-analysis). Roteamento,
+CIDR e VLSM (09 e 10) dão a base para interpretar topologia de rede e
+sub-redes ao analisar logs/tráfego numa investigação.
