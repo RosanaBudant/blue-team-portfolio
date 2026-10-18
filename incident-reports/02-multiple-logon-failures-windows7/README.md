@@ -71,7 +71,7 @@ Logon com sucesso (Event ID 4624, 19:15:01):
 
 ## Análise
 
-1. **Volume e correlação.** Doze falhas em cerca de 1 min 30 s passaram do limite da regra de correlação (8 falhas), e o SIEM elevou a severidade de 5 para 10. Isso é o que diferencia este incidente do 01: três falhas isoladas são ruído; uma sequência assim já merece atenção.
+1. **Volume e correlação.** A regra 60204 dispara com 8 falhas vindas do mesmo `ipAddress` dentro de 240 segundos. Aqui, entre a 1ª falha (19:12:49) e a 8ª (19:14:07) passaram 78 s, bem dentro da janela, e todas tinham a mesma origem (`127.0.0.1`). O SIEM então elevou a severidade de 5 para 10. Isso é o que diferencia este incidente do 01: três falhas isoladas são ruído; uma sequência assim já merece atenção.
 2. **Usuário válido.** O `subStatus 0xc000006a` em todas as falhas indica que a conta existe e só a senha estava errada. Se fosse tentativa às cegas, seria comum ver também `0xc0000064` (usuário inexistente).
 3. **Origem local.** `127.0.0.1` e `logonType 2` indicam alguém digitando na tela de login da própria máquina, e não ataque pela rede.
 4. **Ritmo humano, com pausas.** Intervalos de 2 a 4 segundos e uma pausa de cerca de 38 s no meio são típicos de digitação manual. Ferramentas automatizadas tentam várias senhas por segundo, sem pausa.
@@ -112,11 +112,29 @@ Nenhum além do próprio teste. O logon com sucesso foi do usuário legítimo do
 
 ## Lições e limitações da detecção
 
-- A regra 60204 só dispara com 8 falhas dentro da janela de tempo dela. Um atacante que tente poucas senhas por vez ("low and slow") pode ficar abaixo do limite, como aconteceu no incidente 01. A janela de tempo exata não aparece nos campos do alerta; vale conferir a definição da regra no Wazuh (Server management → Rules).
-- Como no incidente 01, a detecção só existe porque a auditoria de falhas de logon foi ativada no Windows 7 (`auditpol`). A qualidade do SIEM depende da política de auditoria do endpoint.
+A definição da regra 60204 foi conferida em *Server management → Rules* (arquivo `0580-win-security_rules.xml`):
+
+| Parâmetro | Valor | Significado |
+|---|---|---|
+| `frequency` | `$MS_FREQ` (8) | Número de falhas necessárias para disparar |
+| `timeframe` | 240 s | Janela em que essas falhas precisam ocorrer |
+| `if_matched_group` | `authentication_failed` | Só conta eventos de falha de autenticação (como os da regra 60122) |
+| `same_field` | `win.eventdata.ipAddress` | As falhas precisam ter a mesma origem |
+| `options` | `no_full_log` | O alerta não traz o log bruto; a investigação exige consultar os 4625 individuais |
+
+![Definição da regra 60204 em Server management → Rules](img/05-definicao-regra-60204.png)
+
+Ou seja, o alerta de nível 10 só ocorre quando **8 falhas vindas do mesmo IP acontecem dentro de 4 minutos**. A regra agrupa pela origem, não pela conta.
+
+Limitações que isso revela:
+
+- **Ataque lento ("low and slow").** Se as tentativas forem espaçadas em cerca de 35 s ou mais, 8 falhas nunca cabem na janela de 240 s (7 intervalos × 35 s = 245 s). Seriam cerca de 100 tentativas por hora sem disparar a regra. O incidente 01, com só 3 falhas, ficou abaixo do limite por volume, independente do tempo.
+- **Ataque distribuído.** Como o contador é por IP, várias máquinas fazendo poucas tentativas cada não somam no mesmo contador, mesmo atacando a mesma conta.
+- **Origem local.** Neste teste todas as falhas tinham `ipAddress: 127.0.0.1`, e a correlação funcionou por isso. Mas, em logons locais, falhas de contas e pessoas diferentes na mesma máquina também seriam contadas juntas, porque compartilham esse mesmo valor de origem.
+- **Dependência da auditoria.** Como no incidente 01, a detecção só existe porque a auditoria de falhas de logon foi ativada no Windows 7 (`auditpol`). A qualidade do SIEM depende da política de auditoria do endpoint.
 
 ## Próximos passos
 
-- Conferir a definição das regras 60122 e 60204 em Server management → Rules (janela de tempo e condições).
 - Testar o caso de usuário inexistente (`subStatus 0xc0000064`) e comparar os campos.
-- Gerar falhas contra a Windows 7 a partir de outra máquina (Kali, na fase seguinte do laboratório), para observar `logonType` e `ipAddress` de origem remota.
+- Gerar falhas contra a Windows 7 a partir de outra máquina (Kali, na fase seguinte do laboratório), para observar `logonType` e `ipAddress` de origem remota e confirmar o agrupamento por IP.
+- Avaliar regras locais complementares: uma agrupando por conta-alvo (`targetUserName`), para ataques distribuídos, e outra com janela maior, para ataques lentos.
