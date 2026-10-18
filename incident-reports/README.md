@@ -18,6 +18,7 @@ Os relatórios seguem a mesma estrutura:
 | # | Incidente | Host | Regra Wazuh | MITRE (sugerido pelo Wazuh) | Severidade |
 |---|---|---|---|---|---|
 | 01 | [Falhas de logon interativo na Windows 7](./01-logon-failure-windows7) | `windows7-agent` | 60122 | T1531 (Account Access Removal) | Nível 5 |
+| 02 | [Múltiplas falhas de logon seguidas de logon com sucesso na Windows 7](./02-multiple-logon-failures-windows7) | `windows7-agent` | 60204 (e 60122) | T1110 (Brute Force) | Nível 10 |
 
 ## Observação
 
